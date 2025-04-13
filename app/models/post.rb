@@ -2,7 +2,7 @@ class Post < ApplicationRecord
   belongs_to :user, dependent: :destroy
 
   validates :title, presence: true, length: { minimum: 3, maximum: 100 }
-  validates :content, presence: true
+  validates :content, presence: true, length: { minimum: 20 }
   validates :hero_image, format: { with: URI::regexp(%w[http https]), message: "must be a valid URL with http or https" }, allow_blank: true
 
   # Add a default scope to order posts by creation date (newest first)
