@@ -1,14 +1,15 @@
 class Post < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, dependent: :destroy
 
   validates :title, presence: true, length: { minimum: 3, maximum: 100 }
-  validates :content, presence: true, length: { minimum: 10 }
+  validates :content, presence: true
+  validates :hero_image, format: { with: URI::regexp(%w[http https]), message: "must be a valid URL" }, allow_blank: true
 
   # Add a default scope to order posts by creation date (newest first)
   default_scope { order(created_at: :desc) }
 
   # Add a method to get a truncated version of the content for previews
   def excerpt(length = 150)
-    content.length > length ? content[0..length] + "..." : content
+    content.to_s.truncate(length)
   end
 end

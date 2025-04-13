@@ -92,7 +92,7 @@ module Api
       end
 
       def post_params
-        params.require(:post).permit(:title, :content)
+        params.require(:post).permit(:title, :content, :hero_image)
       end
 
       def post_json(post)
@@ -101,6 +101,7 @@ module Api
           title: post.title,
           content: post.content,
           excerpt: post.excerpt,
+          hero_image: post.hero_image,
           user_id: post.user_id,
           user_email: post.user.email,
           created_at: post.created_at,
