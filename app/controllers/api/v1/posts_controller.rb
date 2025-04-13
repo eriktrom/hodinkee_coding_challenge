@@ -92,7 +92,7 @@ module Api
       private
 
       def set_post
-        @post = Post.find(params[:id])
+        @post = Post.friendly.find(params[:id])
       rescue ActiveRecord::RecordNotFound
         render json: {
           status: 'error',
@@ -111,6 +111,7 @@ module Api
           content: post.content,
           excerpt: post.excerpt,
           hero_image: post.hero_image,
+          slug: post.slug,
           user_id: post.user_id,
           user_email: post.user.email,
           created_at: post.created_at,
