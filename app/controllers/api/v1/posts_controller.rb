@@ -5,24 +5,24 @@ module Api
       before_action :authenticate_user, only: [:create, :update, :destroy]
 
       # GET /api/v1/posts
-      def index
+  def index
         @posts = Post.all
         render json: {
           status: 'success',
           data: @posts.map { |post| post_json(post) }
         }
-      end
+  end
 
       # GET /api/v1/posts/:id
-      def show
+  def show
         render json: {
           status: 'success',
           data: post_json(@post)
         }
-      end
+  end
 
       # POST /api/v1/posts
-      def create
+  def create
         @post = current_user.posts.build(post_params)
 
         if @post.save
@@ -38,10 +38,10 @@ module Api
             errors: @post.errors.full_messages
           }, status: :unprocessable_entity
         end
-      end
+  end
 
       # PUT /api/v1/posts/:id
-      def update
+  def update
         if @post.user_id != current_user.id
           return render json: {
             status: 'error',
@@ -62,10 +62,10 @@ module Api
             errors: @post.errors.full_messages
           }, status: :unprocessable_entity
         end
-      end
+  end
 
       # DELETE /api/v1/posts/:id
-      def destroy
+  def destroy
         if @post.user_id != current_user.id
           return render json: {
             status: 'error',
