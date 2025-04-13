@@ -11,6 +11,9 @@ class User < ApplicationRecord
             length: { minimum: 6 },
             if: :password_required?
 
+  # Add posts association
+  has_many :posts, dependent: :destroy
+
   private
 
   def password_required?
