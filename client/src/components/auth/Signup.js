@@ -35,9 +35,11 @@ const Signup = () => {
 
     try {
       const response = await axios.post(API_ENDPOINTS.AUTH.SIGNUP, {
-        email,
-        password,
-        password_confirmation: passwordConfirmation,
+        user: {
+          email,
+          password,
+          password_confirmation: passwordConfirmation,
+        }
       });
 
       localStorage.setItem('token', response.data.data.token);
