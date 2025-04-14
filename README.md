@@ -159,7 +159,7 @@ A modern blog application built with Rails API backend and React frontend, featu
 
 2. **Configure environment variables**
    ```bash
-   heroku config:set REACT_APP_API_URL=https://hod-api-aec14b10c15c.herokuapp.com --app hod-client
+   heroku config:set REACT_APP_API_URL=https://hod-api-17f07695d196.herokuapp.com --app hod-client
    ```
 
 3. **Add the Node.js buildpack**
