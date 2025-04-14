@@ -10,7 +10,7 @@ module Api
 
         # Add pagination
         page = params[:page] || 1
-        per_page = params[:per_page] || 10
+        per_page = params[:per_page] || 5
 
         @posts = @posts.offset((page.to_i - 1) * per_page.to_i).limit(per_page.to_i)
 
