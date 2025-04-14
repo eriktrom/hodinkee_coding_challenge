@@ -2,6 +2,9 @@
 
 A modern blog application built with Rails API backend and React frontend, featuring user authentication, post management, and rich text support.
 
+## Live Demo
+The application is deployed and can be viewed at: [https://hod-client-164d5443ebd2.herokuapp.com/](https://hod-client-164d5443ebd2.herokuapp.com/)
+
 ## Features
 
 ### Core Requirements
