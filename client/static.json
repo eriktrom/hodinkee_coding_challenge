@@ -1,0 +1,15 @@
+{
+  "root": "build/",
+  "routes": {
+    "/**": "index.html"
+  },
+  "clean_urls": true,
+  "headers": {
+    "/**": {
+      "Cache-Control": "public, max-age=0, must-revalidate"
+    },
+    "/static/**": {
+      "Cache-Control": "public, max-age=31536000, immutable"
+    }
+  }
+}
