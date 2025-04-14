@@ -3,11 +3,13 @@
 one:
   title: First Test Post
   content: This is the content of the first test post
+  description: This is a description for the first test post
   user: one
   slug: first-test-post
 
 two:
   title: Second Test Post
   content: This is the content of the second test post
+  description: This is a description for the second test post
   user: two
   slug: second-test-post

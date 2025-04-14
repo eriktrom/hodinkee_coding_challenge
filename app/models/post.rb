@@ -6,6 +6,7 @@ class Post < ApplicationRecord
 
   validates :title, presence: true, length: { minimum: 3, maximum: 100 }
   validates :content, presence: true, length: { minimum: 20 }
+  validates :description, presence: true, length: { minimum: 10, maximum: 500 }
   validates :hero_image, format: { with: URI::regexp(%w[http https]), message: "must be a valid URL with http or https" }, allow_blank: true
   validates :slug, uniqueness: true, presence: true
 

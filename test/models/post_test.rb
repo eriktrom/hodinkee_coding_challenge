@@ -6,6 +6,7 @@ class PostTest < ActiveSupport::TestCase
     @valid_post = Post.new(
       title: "Valid Post Title",
       content: "This is a valid post content that meets the minimum length requirement of 20 characters.",
+      description: "This is a valid description that meets the minimum length requirement.",
       user: @user,
       hero_image: "https://example.com/image.jpg"
     )
@@ -42,6 +43,22 @@ class PostTest < ActiveSupport::TestCase
     @valid_post.content = "Short content"
     assert_not @valid_post.valid?
     assert_includes @valid_post.errors[:content], "is too short (minimum is 20 characters)"
+  end
+
+  test "should require description" do
+    @valid_post.description = nil
+    assert_not @valid_post.valid?
+    assert_includes @valid_post.errors[:description], "can't be blank"
+  end
+
+  test "should require description length between 10 and 500 characters" do
+    @valid_post.description = "Too short"
+    assert_not @valid_post.valid?
+    assert_includes @valid_post.errors[:description], "is too short (minimum is 10 characters)"
+
+    @valid_post.description = "a" * 501
+    assert_not @valid_post.valid?
+    assert_includes @valid_post.errors[:description], "is too long (maximum is 500 characters)"
   end
 
   test "should validate hero_image URL format" do
@@ -97,6 +114,7 @@ class PostTest < ActiveSupport::TestCase
     duplicate_post = Post.new(
       title: @valid_post.title,
       content: "This is another valid post content that meets the minimum length requirement.",
+      description: "This is another valid description that meets the minimum length requirement.",
       user: @user
     )
 
@@ -115,6 +133,7 @@ class PostTest < ActiveSupport::TestCase
     first_post = Post.create!(
       title: "Original Title",
       content: "This is the content of the first post.",
+      description: "This is the description of the first post.",
       user: @user
     )
 
@@ -122,6 +141,7 @@ class PostTest < ActiveSupport::TestCase
     second_post = Post.create!(
       title: "Different Title",
       content: "This is the content of the second post.",
+      description: "This is the description of the second post.",
       user: @user
     )
 
@@ -144,11 +164,13 @@ class PostTest < ActiveSupport::TestCase
     old_post = Post.create!(
       title: "Old Post",
       content: "This is an old post content that meets the minimum length requirement.",
+      description: "This is an old post description that meets the minimum length requirement.",
       user: @user
     )
     new_post = Post.create!(
       title: "New Post",
       content: "This is a new post content that meets the minimum length requirement.",
+      description: "This is a new post description that meets the minimum length requirement.",
       user: @user
     )
 

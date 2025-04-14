@@ -40,11 +40,16 @@ module Api
       test "should create post when authenticated" do
         assert_difference("Post.count") do
           post api_v1_posts_url,
-            params: { post: { title: "New Post", content: "This is longer than 20 characters" } },
+            params: { post: {
+              title: "New Post",
+              content: "This is longer than 20 characters",
+              description: "This is a valid description that meets the minimum length requirement."
+            } },
             headers: { Authorization: "Bearer #{@token}" }
         end
         assert_response :created
         assert_equal "New Post", JSON.parse(response.body)["data"]["title"]
+        assert_equal "This is a valid description that meets the minimum length requirement.", JSON.parse(response.body)["data"]["description"]
       end
 
       test "should not create post without authentication" do
@@ -58,7 +63,7 @@ module Api
       test "should not create post with invalid params" do
         assert_no_difference("Post.count") do
           post api_v1_posts_url,
-            params: { post: { title: "", content: "" } },
+            params: { post: { title: "", content: "", description: "" } },
             headers: { Authorization: "Bearer #{@token}" }
         end
         assert_response :unprocessable_entity
@@ -67,10 +72,14 @@ module Api
 
       test "should update post when authenticated and authorized" do
         patch api_v1_post_url(@post),
-          params: { post: { title: "Updated Title" } },
+          params: { post: {
+            title: "Updated Title",
+            description: "Updated description for the post."
+          } },
           headers: { Authorization: "Bearer #{@token}" }
         assert_response :success
         assert_equal "Updated Title", JSON.parse(response.body)["data"]["title"]
+        assert_equal "Updated description for the post.", JSON.parse(response.body)["data"]["description"]
       end
 
       test "should not update post without authentication" do
