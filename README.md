@@ -127,7 +127,7 @@ A modern blog application built with Rails API backend and React frontend, featu
 
 3. **Configure environment variables**
    ```bash
-   heroku config:set RAILS_MASTER_KEY=$(cat api/config/credentials/production.key) --app hod-api
+   heroku config:set RAILS_MASTER_KEY=$(cat api/config/master.key) --app hod-api
    heroku config:set RAILS_ENV=production --app hod-api
    ```
 
